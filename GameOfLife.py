@@ -16,8 +16,6 @@ def checkNeighbors(room):
             neighbors = np.zeros((3,3), dtype=int)
             for i in range(-1,2):
                 for j in range(-1, 2):
-                    #print("-------------------")
-                    #print("Fila:" + str(row + i) + " Columna:" + str(column + j))
                     newrow = row + i
                     newcolumn = column + j
                     if (i == 0 and j == 0):
@@ -36,8 +34,6 @@ def checkNeighbors(room):
                 roomCopy[row][column] = 1 #Revive
             else:
                 roomCopy[row][column] = 0 #Die
-            #print(count)
-            #print(neighbors)
     return roomCopy
             
 
