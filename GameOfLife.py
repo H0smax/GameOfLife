@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import tkinter as tk
 
 def init(room):
     for row in range(room.shape[0]):
@@ -34,9 +35,10 @@ def checkNeighbors(room):
                 roomCopy[row][column] = 1 #Revive
             else:
                 roomCopy[row][column] = 0 #Die
+            #print(count)
+            #print(neighbors)
     return roomCopy
             
-
 roomSize = 50
 room = np.zeros((roomSize, roomSize), dtype=int)
 init(room)
@@ -46,16 +48,22 @@ fig = plt.figure()
 plt.imshow(room, interpolation="nearest", cmap="Greys")
 plt.ion()
 notVoid = True #Future implementation
+closed = False
 
-refreshTime = 0.5
+refreshTime = 1
 
-while (notVoid):  
+while (notVoid and not closed):
     plt.clf()
     room = checkNeighbors(room)
     plt.imshow(room, interpolation="nearest", cmap="Greys")
-    plt.pause(refreshTime)
-    plt.plot()
     plt.show()
+    try:  
+        plt.pause(refreshTime)
+    except tk.TclError:
+        pass
+    if (not plt.get_fignums()):
+        closed = True
+        break
 
 
 
